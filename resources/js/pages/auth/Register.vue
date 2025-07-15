@@ -14,6 +14,10 @@ const form = useForm({
     password: '',
     password_confirmation: '',
     type: '',
+    bio: '',
+    average_price: '',
+    category_id: '',
+    profile_picture: '',
 });
 
 const submit = () => {
@@ -24,60 +28,95 @@ const submit = () => {
 </script>
 
 <template>
-    <AuthBase title="Create an account" description="Enter your details below to create your account">
+    <AuthBase title="Crie uma conta" description="Informe as credenciais abaixo para criar uma nova conta">
 
         <Head title="Register" />
 
         <form @submit.prevent="submit" class="flex flex-col gap-6">
             <div class="grid gap-6">
                 <div class="grid gap-2">
-                    <Label for="type">Tipo</Label>
-                    <select v-model="form.type" class="form-select" id="inputGroupSelect01">
-                        <option selected>Choose user type</option>
+                    <Label for="type">Tipo de usuário</Label>
+                    <select v-model="form.type" class="form-select border" id="inputGroupSelect01">
                         <option value="client">Cliente</option>
                         <option value="professional">Profissional</option>
-                        <option value="3">Three</option>
                     </select>
                     <InputError :message="form.errors.type" />
                 </div>
 
+                <div v-if="form.type == 'professional'" class="row mb-3">
+                    <div class="col-sm-12">
+                        <div class="grid gap-6">
+                            <div class="grid gap-2">
+                                <Label for="bio">Bio</Label>
+                                <Input id="bio" type="text" autofocus :tabindex="1" autocomplete="bio"
+                                    v-model="form.bio" placeholder="Bio" />
+                                <InputError :message="form.errors.bio" />
+                            </div>
+
+                            <div class="grid gap-2">
+                                <Label for="average_price">Preço/hora</Label>
+                                <Input id="average_price" type="number" autofocus :tabindex="1" autocomplete="average_price"
+                                    v-model="form.average_price" placeholder="45" />
+                                <InputError :message="form.errors.average_price" />
+                            </div>
+
+                            <div class="grid gap-2">
+                                <Label for="category_id">Categoria Id</Label>
+                                <Input id="category_id" type="number" autofocus :tabindex="1" autocomplete="category_id"
+                                    v-model="form.category_id" placeholder="Nome completo" />
+                                <InputError :message="form.errors.category_id" />
+                            </div>
+
+                            <div class="grid gap-2">
+                                <Label for="profile_picture">Foto perfil</Label>
+                                <Input id="profile_picture" type="text" autofocus :tabindex="1" autocomplete="profile_picture"
+                                    v-model="form.profile_picture" placeholder="Nome completo" />
+                                <InputError :message="form.errors.profile_picture" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
                 <div class="grid gap-2">
-                    <Label for="name">Name</Label>
+                    <Label for="name">Nome</Label>
                     <Input id="name" type="text" required autofocus :tabindex="1" autocomplete="name"
-                        v-model="form.name" placeholder="Full name" />
+                        v-model="form.name" placeholder="Nome completo" />
                     <InputError :message="form.errors.name" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="email">Email address</Label>
+                    <Label for="email">E-mail</Label>
                     <Input id="email" type="email" required :tabindex="2" autocomplete="email" v-model="form.email"
-                        placeholder="email@example.com" />
+                        placeholder="email@exemplo.com" />
                     <InputError :message="form.errors.email" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password">Password</Label>
+                    <Label for="password">Senha</Label>
                     <Input id="password" type="password" required :tabindex="3" autocomplete="new-password"
-                        v-model="form.password" placeholder="Password" />
+                        v-model="form.password" placeholder="Senha" />
                     <InputError :message="form.errors.password" />
                 </div>
 
                 <div class="grid gap-2">
-                    <Label for="password_confirmation">Confirm password</Label>
+                    <Label for="password_confirmation">Confirme a senha</Label>
                     <Input id="password_confirmation" type="password" required :tabindex="4" autocomplete="new-password"
-                        v-model="form.password_confirmation" placeholder="Confirm password" />
+                        v-model="form.password_confirmation" placeholder="Confirme a senha" />
                     <InputError :message="form.errors.password_confirmation" />
                 </div>
 
                 <Button type="submit" class="mt-2 w-full" tabindex="5" :disabled="form.processing">
                     <LoaderCircle v-if="form.processing" class="h-4 w-4 animate-spin" />
-                    Create account
+                    Criar conta
                 </Button>
             </div>
 
             <div class="text-center text-sm text-muted-foreground">
-                Already have an account?
-                <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">Log in</TextLink>
+                Já tem uma conta?
+                <TextLink :href="route('login')" class="underline underline-offset-4" :tabindex="6">Entrar</TextLink>
             </div>
         </form>
     </AuthBase>
