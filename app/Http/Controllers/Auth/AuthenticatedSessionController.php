@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Models\Client;
+use App\Models\Professional;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,7 +36,39 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('dashboard', absolute: false));
+        $userType = $this->checkUserType(Auth::user()->id);
+        $route = 'dashboard';
+
+        if($userType){
+            if($userType == 'client'){
+                $route = 'client.dashboard';
+            }
+
+            if($userType == 'professional'){
+                $route = 'professional.dashboard';
+            }
+        }
+
+        return redirect()->intended(route($route, absolute: false));
+    }
+
+    public function checkUserType(int $userId)
+    {
+        $client = Client::where('user_id', $userId)->first();
+
+        if($client)
+        {
+            return 'client';
+        }
+
+        $professional = Professional::where('user_id', $userId)->first();
+
+        if($professional)
+        {
+            return 'professional';
+        }
+
+        return false;
     }
 
     /**

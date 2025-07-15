@@ -53,12 +53,16 @@ public function store(Request $request): mixed
             'password' => bcrypt($validated['password']),
         ]);
 
+        $route = 'dashboard';
+
         if ($request->type === 'client') {
             $this->clientService->store($request, $user);
+            $route = 'client.dashboard';
         }
 
         if ($request->type === 'professional') {
             $this->professionalService->store($request, $user);
+            $route = 'professional.dashboard';
         }
 
         event(new Registered($user));
@@ -67,7 +71,7 @@ public function store(Request $request): mixed
 
         DB::commit();
 
-        return to_route('dashboard');
+        return to_route($route);
 
     } catch (\Exception $e) {
         DB::rollBack();
