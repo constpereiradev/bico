@@ -51,6 +51,7 @@ public function store(Request $request): mixed
             'name'     => $validated['name'],
             'email'    => $validated['email'],
             'password' => bcrypt($validated['password']),
+            'type'     => $request->type,
         ]);
 
         $route = 'dashboard';
