@@ -5,29 +5,30 @@ import { Separator } from '@/components/ui/separator';
 import { type NavItem } from '@/types';
 import { Link, usePage } from '@inertiajs/vue3';
 
+const page = usePage();
+
 const sidebarNavItems: NavItem[] = [
     {
-        title: 'Profile',
-        href: '/settings/profile',
+        title: 'Perfil',
+        href: '/settings/' + page.props.auth.user.type +  '/profile',
     },
     {
-        title: 'Password',
+        title: 'Senha',
         href: '/settings/password',
     },
     {
-        title: 'Appearance',
+        title: 'Aparência',
         href: '/settings/appearance',
     },
 ];
 
-const page = usePage();
 
 const currentPath = page.props.ziggy?.location ? new URL(page.props.ziggy.location).pathname : '';
 </script>
 
 <template>
     <div class="px-4 py-6">
-        <Heading title="Settings" description="Manage your profile and account settings" />
+        <Heading title="Configurações" description="Gerencie seu perfil e as configurações da conta" />
 
         <div class="flex flex-col space-y-8 md:space-y-0 lg:flex-row lg:space-y-0 lg:space-x-12">
             <aside class="w-full max-w-xl lg:w-48">
@@ -40,7 +41,7 @@ const currentPath = page.props.ziggy?.location ? new URL(page.props.ziggy.locati
                         as-child
                     >
                         <Link :href="item.href">
-                            {{ item.title }}
+                            {{ item.title }} 
                         </Link>
                     </Button>
                 </nav>
