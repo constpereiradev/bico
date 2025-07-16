@@ -39,32 +39,31 @@ class AuthenticatedSessionController extends Controller
         $userType = $this->checkUserType(Auth::user()->id);
         $route = 'dashboard';
 
-        if($userType){
-            if($userType == 'client'){
+        if ($userType) {
+            if ($userType == 'client') {
                 $route = 'client.dashboard';
             }
 
-            if($userType == 'professional'){
+            if ($userType == 'professional') {
                 $route = 'professional.dashboard';
             }
         }
 
-        return redirect()->intended(route($route, absolute: false));
+        return redirect()->intended(route($route, absolute: false))
+            ->with('user', Auth::user());
     }
 
     public function checkUserType(int $userId)
     {
         $client = Client::where('user_id', $userId)->first();
 
-        if($client)
-        {
+        if ($client) {
             return 'client';
         }
 
         $professional = Professional::where('user_id', $userId)->first();
 
-        if($professional)
-        {
+        if ($professional) {
             return 'professional';
         }
 
