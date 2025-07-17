@@ -33,6 +33,7 @@ Projeto Bico.
 - Intertia
 - Composer
 - MySQL
+- Node.js
 
 ---
 
@@ -43,6 +44,7 @@ Antes de começar, você precisará ter instalado em sua máquina:
 - [PHP >= 8.2](https://www.php.net/)
 - [Composer](https://getcomposer.org/)
 - Banco de dados (MySQL)
+- [Node.js](https://nodejs.org/pt)
 
 ---
 
@@ -82,7 +84,7 @@ php php artisan migrate
 Para rodar a aplicação localmente:
 
 ```bash
-php artisan start
+php artisan serve
 ```
 
 ```bash
