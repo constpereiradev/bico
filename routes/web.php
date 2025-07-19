@@ -13,7 +13,7 @@ Route::get('dashboard', function () {
 
 Route::get('professional/dashboard', function () {
     return Inertia::render('professional/Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('professional.dashboard');
 
 require __DIR__.'/settings.php';
 require __DIR__.'/auth.php';

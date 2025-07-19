@@ -10,6 +10,7 @@ import AppLogo from './AppLogo.vue';
 
 const mainNavItems: NavItem[] = [
     {
+        //TODO: verificar se é profissional ou cliente para modificar a href.
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,

@@ -20,4 +20,9 @@ class ProfessionalRepository
 
         return $professional;
     }
+
+    public function getProfessionalByUserId(int $userId): Professional
+    {
+        return Professional::where('user_id', $userId)->first();
+    }
 }

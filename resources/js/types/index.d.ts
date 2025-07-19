@@ -36,4 +36,11 @@ export interface User {
     type: string;
 }
 
+export interface Professional {
+    id: number;
+    bio: string;
+    created_at: string;
+    updated_at: string;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;

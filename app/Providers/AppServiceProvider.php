@@ -25,7 +25,22 @@ class AppServiceProvider extends ServiceProvider
         //Retorna informações abaixo em todas as páginas.
         Inertia::share([
             'auth' => [
-                'user' => fn () => Auth::user(),
+                'user' => function () {
+                    $user = Auth::user();
+    
+                    if (!$user) {
+                        return null;
+                    }
+    
+    
+                    return [
+                        'id' => $user->id,
+                        'name' => $user->name,
+                        'email' => $user->email,
+                        'type' => $user->type,
+                        'profile' => $user->{$user->type}, // ex: $user->professional
+                    ];
+                },
             ],
             'data_hoje' => fn () => Carbon::now()->format('d/m/Y'),
         ]);

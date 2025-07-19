@@ -33,4 +33,9 @@ class ProfessionalService
             'profile_picture' => 'required|string',    
         ]);
     }
+
+    public function getProfessionalByUser(User $user): Professional
+    {
+        return $this->professionalRepository->getProfessionalByUserId($user->id);
+    }
 }

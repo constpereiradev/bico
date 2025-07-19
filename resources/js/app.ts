@@ -1,3 +1,4 @@
+import 'bootstrap/dist/css/bootstrap.min.css';
 import '../css/app.css';
 
 import { createInertiaApp } from '@inertiajs/vue3';
@@ -7,7 +8,7 @@ import { createApp, h } from 'vue';
 import { ZiggyVue } from 'ziggy-js';
 import { initializeTheme } from './composables/useAppearance';
 
-const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
+const appName = import.meta.env.VITE_APP_NAME || 'Laravel'; 
 
 createInertiaApp({
     title: (title) => (title ? `${title} - ${appName}` : appName),
